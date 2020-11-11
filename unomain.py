@@ -70,3 +70,10 @@ while True:
 
     turn = choose_first()
     print(turn + ' will go first')
+new_game = input('Would you like to play again? (y/n)')
+    if new_game == 'y':
+        continue
+    else:
+        print('\nThanks for playing!!')
+        clear_output()
+        break
