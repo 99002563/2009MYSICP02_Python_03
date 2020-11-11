@@ -70,6 +70,71 @@ while True:
 
     turn = choose_first()
     print(turn + ' will go first')
+ while playing:
+
+        if turn == 'Player':
+            print('\nTop card is: ' + str(top_card))
+            print('Your cards: ')
+            player_hand.cards_in_hand()
+            if player_hand.no_of_cards() == 1:
+                if last_card_check(player_hand):
+                    print('Last card cannot be action card \nAdding one card from deck')
+                    player_hand.add_card(deck.deal())
+                    print('Your cards: ')
+                    player_hand.cards_in_hand()
+            choice = input("\nHit or Pull? (h/p): ")
+            if choice == 'h':
+                pos = int(input('Enter index of card: '))
+                temp_card = player_hand.single_card(pos)
+                if single_card_check(top_card, temp_card):
+                    if temp_card.cardtype == 'number':
+                        top_card = player_hand.remove_card(pos)
+                        turn = 'Pc'
+                    else:
+                        if temp_card.rank == 'Skip':
+                            turn = 'Player'
+                            top_card = player_hand.remove_card(pos)
+                        elif temp_card.rank == 'Reverse':
+                            turn = 'Player'
+                            top_card = player_hand.remove_card(pos)
+                        elif temp_card.rank == 'Draw2':
+                            pc_hand.add_card(deck.deal())
+                            pc_hand.add_card(deck.deal())
+                            top_card = player_hand.remove_card(pos)
+                            turn = 'Player'
+                        elif temp_card.rank == 'Draw4':
+                            for i in range(4):
+                                pc_hand.add_card(deck.deal())
+                            top_card = player_hand.remove_card(pos)
+                            draw4color = input('Change color to (enter in caps): ')
+                            if draw4color != draw4color.upper():
+                                draw4color = draw4color.upper()
+                            top_card.color = draw4color
+                            turn = 'Player'
+                        elif temp_card.rank == 'Wild':
+                            top_card = player_hand.remove_card(pos)
+                            wildcolor = input('Change color to (enter in caps): ')
+                            if wildcolor != wildcolor.upper():
+                                wildcolor = wildcolor.upper()
+                            top_card.color = wildcolor
+                            turn = 'Pc'
+                else:
+                    print('This card cannot be used')
+            elif choice == 'p':
+                temp_card = deck.deal()
+                print('You got: ' + str(temp_card))
+                time.sleep(1)
+                if single_card_check(top_card, temp_card):
+                    player_hand.add_card(temp_card)
+                else:
+                    print('Cannot use this card')
+                    player_hand.add_card(temp_card)
+                    turn = 'Pc'
+            if win_check(player_hand):
+                print('\nPLAYER WON!!')
+                playing = False
+                break
+
 new_game = input('Would you like to play again? (y/n)')
     if new_game == 'y':
         continue
