@@ -67,6 +67,10 @@ def single_card_check(top_card,card):
     else:
         return False
 
+    
+
+=======
+
 #FOR PC ONLY
 #To check if PC has any valid card to throw 
 def full_hand_check(hand,top_card):
@@ -75,7 +79,15 @@ def full_hand_check(hand,top_card):
             return hand.remove_card(hand.cardsstr.index(str(c))+1)
     else:
         return 'no card'
- 
+      
+  #Function to check if either wins
+def win_check(hand):
+    if len(hand.cards)==0:
+        return True
+    else:
+        return False
+      
+ main
 #The gaming loop
 while True:
 
