@@ -178,6 +178,92 @@ while True:
                 print('\nPLAYER WON!!')
                 playing = False
                 break
+if turn == 'Pc':
+            if pc_hand.no_of_cards() == 1:
+                if last_card_check(pc_hand):
+                    time.sleep(1)
+                    print('Adding a card to PC hand')
+                    pc_hand.add_card(deck.deal())
+            temp_card = full_hand_check(pc_hand, top_card)
+            time.sleep(1)
+            if temp_card != 'no card':
+                print(f'\nPC throws: {temp_card}')
+                time.sleep(1)
+                if temp_card.cardtype == 'number':
+                    top_card = temp_card
+                    turn = 'Player'
+                else:
+                    if temp_card.rank == 'Skip':
+                        turn = 'Pc'
+                        top_card = temp_card
+                    elif temp_card.rank == 'Reverse':
+                        turn = 'Pc'
+                        top_card = temp_card
+                    elif temp_card.rank == 'Draw2':
+                        player_hand.add_card(deck.deal())
+                        player_hand.add_card(deck.deal())
+                        top_card = temp_card
+                        turn = 'Pc'
+                    elif temp_card.rank == 'Draw4':
+                        for i in range(4):
+                            player_hand.add_card(deck.deal())
+                        top_card = temp_card
+                        draw4color = pc_hand.cards[0].color
+                        print('Color changes to', draw4color)
+                        top_card.color = draw4color
+                        turn = 'Pc'
+                    elif temp_card.rank == 'Wild':
+                        top_card = temp_card
+                        wildcolor = pc_hand.cards[0].color
+                        print("Color changes to", wildcolor)
+                        top_card.color = wildcolor
+                        turn = 'Player'
+            else:
+                print('\nPC pulls a card from deck')
+                time.sleep(1)
+                temp_card = deck.deal()
+                if single_card_check(top_card, temp_card):
+                    print(f'PC throws: {temp_card}')
+                    time.sleep(1)
+                    if temp_card.cardtype == 'number':
+                        top_card = temp_card
+                        turn = 'Player'
+                    else:
+                        if temp_card.rank == 'Skip':
+                            turn = 'Pc'
+                            top_card = temp_card
+                        elif temp_card.rank == 'Reverse':
+                            turn = 'Pc'
+                            top_card = temp_card
+                        elif temp_card.rank == 'Draw2':
+                            player_hand.add_card(deck.deal())
+                            player_hand.add_card(deck.deal())
+                            top_card = temp_card
+                            turn = 'Pc'
+                        elif temp_card.rank == 'Draw4':
+                            for i in range(4):
+                                player_hand.add_card(deck.deal())
+                            top_card = temp_card
+                            draw4color = pc_hand.cards[0].color
+                            print('Color changes to', draw4color)
+                            top_card.color = draw4color
+                            turn = 'Pc'
+                        elif temp_card.rank == 'Wild':
+                            top_card = temp_card
+                            wildcolor = pc_hand.cards[0].color
+                            print('Color changes to', wildcolor)
+                            top_card.color = wildcolor
+                            turn = 'Player'
+                else:
+                    print('PC doesnt have a card')
+                    time.sleep(1)
+                    pc_hand.add_card(temp_card)
+                    turn = 'Player'
+            print('\nPC has {} cards remaining'.format(pc_hand.no_of_cards()))
+            time.sleep(1)
+            if win_check(pc_hand):
+                print('\nPC WON!!')
+                playing = False
 
 new_game = input('Would you like to play again? (y/n)')
     if new_game == 'y':
