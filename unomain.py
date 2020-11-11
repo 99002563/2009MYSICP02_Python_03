@@ -29,11 +29,17 @@ class Card:
         else:
             return self.color+" "+self.rank
 
-   #Funciton to randomly select who starts first
+ #Funciton to randomly select who starts first
 def choose_first():
     if random.randint(0,1)==0:
         return 'Player'
     else:
         return 'Pc'
-    
+   
+#Function to check if the card thrown by Player/PC is a valid card by comparing it with the top card
+def single_card_check(top_card,card):
+    if card.color==top_card.color or top_card.rank==card.rank or card.cardtype=='action_nocolor':
+        return True
+    else:
+        return False
             
