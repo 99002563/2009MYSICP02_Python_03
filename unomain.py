@@ -28,7 +28,31 @@ class Card:
             return self.rank
         else:
             return self.color+" "+self.rank
-
+class Deck:
+    
+    def __init__(self):
+        self.deck = []
+        for clr in color:
+            for ran in rank:
+                if ctype[ran]!='action_nocolor':
+                    self.deck.append(Card(clr,ran))
+                    self.deck.append(Card(clr,ran))
+                else:
+                    self.deck.append(Card(clr,ran))
+    
+    def __str__(self):
+        deck_comp=''
+        for card in self.deck:
+            deck_comp+='\n'+card.__str__()
+        return 'The deck has '+deck_comp
+    
+    def shuffle(self):
+        random.shuffle(self.deck)
+        
+    def deal(self):
+        return self.deck.pop()
+                
+                
  #Funciton to randomly select who starts first
 def choose_first():
     if random.randint(0,1)==0:
@@ -42,13 +66,28 @@ def single_card_check(top_card,card):
         return True
     else:
         return False
+
     
- #Function to check if either wins
+
+=======
+
+#FOR PC ONLY
+#To check if PC has any valid card to throw 
+def full_hand_check(hand,top_card):
+    for c in hand.cards:
+        if c.color==top_card.color or c.rank == top_card.rank or c.cardtype=='action_nocolor':
+            return hand.remove_card(hand.cardsstr.index(str(c))+1)
+    else:
+        return 'no card'
+      
+  #Function to check if either wins
 def win_check(hand):
     if len(hand.cards)==0:
         return True
     else:
         return False
+      
+ main
 #The gaming loop
 while True:
 
