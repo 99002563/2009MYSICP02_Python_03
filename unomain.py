@@ -28,6 +28,12 @@ class Card:
             return self.rank
         else:
             return self.color+" "+self.rank
-        
+
+   #Funciton to randomly select who starts first
+def choose_first():
+    if random.randint(0,1)==0:
+        return 'Player'
+    else:
+        return 'Pc'
     
             
