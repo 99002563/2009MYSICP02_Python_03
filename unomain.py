@@ -42,4 +42,31 @@ def single_card_check(top_card,card):
         return True
     else:
         return False
-            
+    
+ 
+#The gaming loop
+while True:
+
+    print('Welcome to UNO! Finish your cards first to win')
+
+    deck = Deck()
+    deck.shuffle()
+
+    player_hand = Hand()   
+    for i in range(7):
+        player_hand.add_card(deck.deal())
+
+    pc_hand = Hand()
+    for i in range(7):
+        pc_hand.add_card(deck.deal())
+
+    top_card = deck.deal()
+    if top_card.cardtype != 'number':
+        while top_card.cardtype != 'number':
+            top_card = deck.deal()
+    print('\nStarting Card is: {}'.format(top_card))
+    time.sleep(1)
+    playing = True
+
+    turn = choose_first()
+    print(turn + ' will go first')
