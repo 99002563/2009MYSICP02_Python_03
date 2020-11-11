@@ -86,7 +86,15 @@ def win_check(hand):
         return True
     else:
         return False
-      
+     
+#Function to check if last card is an action card (GAME MUST END WITH A NUMBER CARD)
+def last_card_check(hand):
+    for c in hand.cards:
+        if c.cardtype!='number':
+            return True
+        else:
+            return False
+
  main
 #The gaming loop
 while True:
