@@ -43,7 +43,12 @@ def single_card_check(top_card,card):
     else:
         return False
     
- 
+ #Function to check if either wins
+def win_check(hand):
+    if len(hand.cards)==0:
+        return True
+    else:
+        return False
 #The gaming loop
 while True:
 
