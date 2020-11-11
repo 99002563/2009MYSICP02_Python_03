@@ -28,7 +28,31 @@ class Card:
             return self.rank
         else:
             return self.color+" "+self.rank
-
+class Deck:
+    
+    def __init__(self):
+        self.deck = []
+        for clr in color:
+            for ran in rank:
+                if ctype[ran]!='action_nocolor':
+                    self.deck.append(Card(clr,ran))
+                    self.deck.append(Card(clr,ran))
+                else:
+                    self.deck.append(Card(clr,ran))
+    
+    def __str__(self):
+        deck_comp=''
+        for card in self.deck:
+            deck_comp+='\n'+card.__str__()
+        return 'The deck has '+deck_comp
+    
+    def shuffle(self):
+        random.shuffle(self.deck)
+        
+    def deal(self):
+        return self.deck.pop()
+                
+                
  #Funciton to randomly select who starts first
 def choose_first():
     if random.randint(0,1)==0:
